@@ -1,9 +1,21 @@
+# Chef
 .vagrant
 /cookbooks
+.kitchen/
+.kitchen.local.yml
 
-# Bundler
+# Ruby Bundler
 bin/*
 .bundle/*
 
-.kitchen/
-.kitchen.local.yml
+# OSX hidden (and unnecessary) system files
+/**/.DS_Store
+
+# IDE-specific user config files
+/.idea
+
+# Berkshelf
+Berksfile.lock
+
+# AWS OpsWorks local workflow
+/aws-cookbooks/
