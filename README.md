@@ -6,44 +6,6 @@ Custom [Chef][] Cookbooks for Amazon [AWS OpsWorks][] to support [Meteor Multive
 
 ## The Cookbooks
 
-### Cookbook: `common_layer`
-
-This cookbook is for customizing any/all built-in or Custom Layer(s) within an OpsWorks Stack. It should **NOT** be considered a "Layer" of its own but rather a set of Layer customizations/enhancements that can be applied to any other Layer.
-
-#### Purpose
-
-This "Layer" provides:
-
- - A mechanism to apply shared best practices to any other Layer
-
-#### Layer Necessity
-
- - Optional but recommended
-
-#### Prerequisites
-
- - _N/A_
-
-#### Recipe Usage per AWS OpsWorks Lifecycle Phase
-
- - **Setup**
-     - `common_layer::setup`
- - **Configure**
-     - `common_layer::configure`
- - **Deploy**
-     - `common_layer::deploy`
- - **Undeploy**
-     - `common_layer::undeploy`
- - **Shutdown**
-     - `common_layer::shutdown`
-
-
-#### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
-
- - _N/A_
-
-
-
 ### Cookbook: `haproxy_layer`
 
 This cookbook is for customizing a Custom Layer in an OpsWorks Stack to run an [HAProxy][] Load Balancer in front of [`nodejs_layer`][] and [`nginx_layer`][] Layers.
@@ -79,7 +41,6 @@ This Layer provides:
      - `haproxy_layer::undeploy`
  - **Shutdown**
      - `haproxy_layer::shutdown`
-
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
@@ -127,7 +88,6 @@ This Layer provides:
  - **Shutdown**
      - `nginx_layer::shutdown`
 
-
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
  - `nginx_layer::app_restart`
@@ -142,13 +102,13 @@ This Layer provides:
 
 ### Cookbook: `nodejs_layer`
 
-This cookbook is for customizing a Custom Layer in an OpsWorks Stack to run a [Meteor][] app bundle using [Node.js][] &mdash; _NOT_ using [Meteor][]!
+This cookbook is for customizing a Custom Layer in an OpsWorks Stack to run a [Meteor][] app bundle using [Node.js][] &mdash; _NOT_ using Meteor!
 
 #### Purpose
 
 This Layer provides:
 
- - ???
+ - Serving the primary functionality of the [Meteor][] app from its bundled [Node.js][] app form
 
 #### Layer Necessity
 
@@ -173,7 +133,6 @@ This Layer provides:
  - **Shutdown**
      - `nodejs_layer::shutdown`
 
-
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
  - `nodejs_layer::app_restart`
@@ -182,6 +141,7 @@ This Layer provides:
      - Start the Node.js app process(es)
  - `nodejs_layer::app_stop`
      - Stop the Node.js app process(es)
+
 
 
 
@@ -195,6 +155,7 @@ You can also choose to create this Layer in a separate OpsWorks Stack all of its
 
 This Layer provides:
 
+ - Secure SSH tunneling for authorized shell access
  - Security buffer against unauthorized shell access
 
 #### Layer Necessity
@@ -218,6 +179,44 @@ This Layer provides:
  - **Shutdown**
      - `ssh_layer::shutdown`
 
+
+#### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
+
+ - _N/A_
+
+
+
+
+### Cookbook: `common_layer`
+
+This cookbook is for customizing any/all built-in or Custom Layer(s) within an OpsWorks Stack. It should **NOT** be considered a "Layer" of its own but rather a set of Layer customizations/enhancements that can be applied to any other Layer.
+
+#### Purpose
+
+This "Layer" provides:
+
+ - A mechanism to apply shared best practices to any other Layer
+
+#### Layer Necessity
+
+ - Optional but recommended
+
+#### Prerequisites
+
+ - _N/A_
+
+#### Recipe Usage per AWS OpsWorks Lifecycle Phase
+
+ - **Setup**
+     - `common_layer::setup`
+ - **Configure**
+     - `common_layer::configure`
+ - **Deploy**
+     - `common_layer::deploy`
+ - **Undeploy**
+     - `common_layer::undeploy`
+ - **Shutdown**
+     - `common_layer::shutdown`
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
