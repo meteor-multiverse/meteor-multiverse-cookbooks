@@ -1,0 +1,61 @@
+<%#
+variables(
+  :log_path          => e.g. '/var/log/haproxy/haproxy.log'
+  :log_dirs          => e.g. ["#{deploy[:deploy_to]}/shared/log"],
+  :days_to_keep_logs => e.g. 7,
+  :max_log_size      => e.g. '1M'
+)
+%>
+<%
+  var log_file_pattern  = @log_path || @log_dirs.map {|dir| dir + '/*.log '}
+  var log_rotation_days = (@days_to_keep_logs && @days_to_keep_logs.to_i) || 7
+  var log_max_size      = @max_log_size || '1M'
+%>
+<%= log_file_pattern %> {
+
+    # Rotate daily
+    daily
+
+    # Keep up to <%= log_rotation_days %> days' worth of logs
+    rotate <%= log_rotation_days %>
+
+    # Also allow rotation more frequently than daily if the log file reaches a
+    # size of <%= log_max_size %>
+    size <%= log_max_size %>
+
+    # Do not rotate log files if they are empty
+    notifempty
+
+    # Continue processing other log files even if one log file is missing
+    missingok
+
+    # Copy the existing log file and then empty it rather than moving the file
+    # and creating a new one. Note that this may result in some lost log
+    # entries if there is logging occurs during the rotation.
+    copytruncate
+
+    # Only execute "prescript" and "postscript" configured scripts a maximum of
+    # once per file, no matter how many times that file matches various
+    # wildcard patterns.
+    sharedscripts
+
+    # Provide the rotated log files with a date-based extension:
+    #   {log_base_name}.YYYY-mm-dd.log.gz
+    dateext
+    dateformat .%Y-%m-%d
+    extension .log
+
+    # Compress the old log files once they are free of consumers
+    compress
+    compressext .gz
+
+    # Postpone compression of the previous log file to the next rotation cycle.
+    # It can be used when some program can not be told to close its logfile and
+    # thus might continue writing to the previous log file for some time.
+    delaycompress
+
+    <% if node[:platform] == 'ubuntu' && node[:platform_version] == '14.04' -%>
+    su root root
+    <% end -%>
+
+}

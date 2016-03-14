@@ -6,9 +6,9 @@ Custom [Chef][] Cookbooks for Amazon [AWS OpsWorks][] to support [Meteor Multive
 
 ## The Cookbooks
 
-### Cookbook: `haproxy_layer`
+### Cookbook: `mm_layer_haproxy`
 
-This cookbook is for customizing a Custom Layer in an OpsWorks Stack to run an [HAProxy][] Load Balancer in front of [`nodejs_layer`][] and [`nginx_layer`][] Layers.
+This cookbook is for customizing a Custom Layer in an OpsWorks Stack to run an [HAProxy][] Load Balancer in front of [`mm_layer_nodejs`][] and [`mm_layer_nginx`][] Layers.
 
 #### Purpose
 
@@ -32,37 +32,37 @@ This Layer provides:
 #### Recipe Usage per AWS OpsWorks Lifecycle Phase
 
  - **Setup**
-     - `haproxy_layer::setup`
+     - `mm_layer_haproxy::setup`
  - **Configure**
-     - `haproxy_layer::configure`
+     - `mm_layer_haproxy::configure`
  - **Deploy**
-     - `haproxy_layer::deploy`
+     - `mm_layer_haproxy::deploy`
  - **Undeploy**
-     - `haproxy_layer::undeploy`
+     - `mm_layer_haproxy::undeploy`
  - **Shutdown**
-     - `haproxy_layer::shutdown`
+     - `mm_layer_haproxy::shutdown`
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
- - `haproxy_layer::app_restart`
+ - `mm_layer_haproxy::app_restart`
      - Restart the HAProxy service
- - `haproxy_layer::app_start`
+ - `mm_layer_haproxy::app_start`
      - Start the HAProxy service
- - `haproxy_layer::app_stop`
+ - `mm_layer_haproxy::app_stop`
      - Stop the HAProxy service
 
 
 
 
-### Cookbook: `nginx_layer`
+### Cookbook: `mm_layer_nginx`
 
-This cookbook is for customizing a Custom Layer in an OpsWorks Stack to host/serve the static frontend assets from a [Meteor][] app bundle using [NGINX][] web server(s). Those same static frontend assets are available in the [`nodejs_layer`][] as well, just in case this `nginx_layer` is unavailable (or you choose not to enable this layer).
+This cookbook is for customizing a Custom Layer in an OpsWorks Stack to host/serve the static frontend assets from a [Meteor][] app bundle using [NGINX][] web server(s). Those same static frontend assets are available in the [`mm_layer_nodejs`][] as well, just in case this `mm_layer_nginx` is unavailable (or you choose not to enable this layer).
 
 #### Purpose
 
 This Layer provides:
 
- - Serving frontend static assets to offload that mindless burden from the [`nodejs_layer`][]
+ - Serving frontend static assets to offload that mindless burden from the [`mm_layer_nodejs`][]
  - GZip compression of those assets for reduced download size/time
 
 #### Layer Necessity
@@ -78,29 +78,29 @@ This Layer provides:
 #### Recipe Usage per AWS OpsWorks Lifecycle Phase
 
  - **Setup**
-     - `nginx_layer::setup`
+     - `mm_layer_nginx::setup`
  - **Configure**
-     - `nginx_layer::configure`
+     - `mm_layer_nginx::configure`
  - **Deploy**
-     - `nginx_layer::deploy`
+     - `mm_layer_nginx::deploy`
  - **Undeploy**
-     - `nginx_layer::undeploy`
+     - `mm_layer_nginx::undeploy`
  - **Shutdown**
-     - `nginx_layer::shutdown`
+     - `mm_layer_nginx::shutdown`
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
- - `nginx_layer::app_restart`
+ - `mm_layer_nginx::app_restart`
      - Restart the NGINX service
- - `nginx_layer::app_start`
+ - `mm_layer_nginx::app_start`
      - Start the NGINX service
- - `nginx_layer::app_stop`
+ - `mm_layer_nginx::app_stop`
      - Stop the NGINX service
 
 
 
 
-### Cookbook: `nodejs_layer`
+### Cookbook: `mm_layer_nodejs`
 
 This cookbook is for customizing a Custom Layer in an OpsWorks Stack to run a [Meteor][] app bundle using [Node.js][] &mdash; _NOT_ using Meteor!
 
@@ -123,29 +123,29 @@ This Layer provides:
 #### Recipe Usage per AWS OpsWorks Lifecycle Phase
 
  - **Setup**
-     - `nodejs_layer::setup`
+     - `mm_layer_nodejs::setup`
  - **Configure**
-     - `nodejs_layer::configure`
+     - `mm_layer_nodejs::configure`
  - **Deploy**
-     - `nodejs_layer::deploy`
+     - `mm_layer_nodejs::deploy`
  - **Undeploy**
-     - `nodejs_layer::undeploy`
+     - `mm_layer_nodejs::undeploy`
  - **Shutdown**
-     - `nodejs_layer::shutdown`
+     - `mm_layer_nodejs::shutdown`
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
- - `nodejs_layer::app_restart`
+ - `mm_layer_nodejs::app_restart`
      - Restart the Node.js app process(es)
- - `nodejs_layer::app_start`
+ - `mm_layer_nodejs::app_start`
      - Start the Node.js app process(es)
- - `nodejs_layer::app_stop`
+ - `mm_layer_nodejs::app_stop`
      - Stop the Node.js app process(es)
 
 
 
 
-### Cookbook: `ssh_layer`
+### Cookbook: `mm_layer_ssh`
 
 This cookbook is for customizing a Custom Layer in an OpsWorks Stack to serve as your secured SSH Bastion Host a.k.a. SSH Jump Host a.k.a. SSH Pass-Through.  In other words, if you enable this layer, then you must always SSH tunnel into one of its SSH Bastion Host servers before continuing on to one of the servers from the other Layers.
 
@@ -169,15 +169,15 @@ This Layer provides:
 #### Recipe Usage per AWS OpsWorks Lifecycle Phase
 
  - **Setup**
-     - `ssh_layer::setup`
+     - `mm_layer_ssh::setup`
  - **Configure**
-     - `ssh_layer::configure`
+     - `mm_layer_ssh::configure`
  - **Deploy**
-     - `ssh_layer::deploy`
+     - `mm_layer_ssh::deploy`
  - **Undeploy**
-     - `ssh_layer::undeploy`
+     - `mm_layer_ssh::undeploy`
  - **Shutdown**
-     - `ssh_layer::shutdown`
+     - `mm_layer_ssh::shutdown`
 
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
@@ -187,12 +187,15 @@ This Layer provides:
 
 
 
-### Cookbook: `common_layer`
+### Cookbook: `mm_lib_common`
 
+???
 This cookbook is for customizing any/all built-in or Custom Layer(s) within an OpsWorks Stack. It should **NOT** be considered a "Layer" of its own but rather a set of Layer customizations/enhancements that can be applied to any other Layer.
+???
 
 #### Purpose
 
+???
 This "Layer" provides:
 
  - A mechanism to apply shared best practices to any other Layer
@@ -208,15 +211,15 @@ This "Layer" provides:
 #### Recipe Usage per AWS OpsWorks Lifecycle Phase
 
  - **Setup**
-     - `common_layer::setup`
+     - `mm_lib_common::setup`
  - **Configure**
-     - `common_layer::configure`
+     - `mm_lib_common::configure`
  - **Deploy**
-     - `common_layer::deploy`
+     - `mm_lib_common::deploy`
  - **Undeploy**
-     - `common_layer::undeploy`
+     - `mm_lib_common::undeploy`
  - **Shutdown**
-     - `common_layer::shutdown`
+     - `mm_lib_common::shutdown`
 
 #### Recipe Usage outside of the AWS OpsWorks Lifecycle Phases
 
@@ -247,10 +250,10 @@ Special thanks go out to:
 [Meteor]: https://www.meteor.com/
 [Node.js]: https://nodejs.org/
 [aws/opsworks-cookbooks]: https://github.com/aws/opsworks-cookbooks/
-[`common_layer`]: #cookbook-common_layer
-[`haproxy_layer`]: #cookbook-haproxy_layer
-[`nginx_layer`]: #cookbook-nginx_layer
-[`nodejs_layer`]: #cookbook-nodejs_layer
-[`ssh_layer`]: #cookbook-ssh_layer
+[`mm_lib_common`]: #cookbook-mm_lib_common
+[`mm_layer_haproxy`]: #cookbook-mm_layer_haproxy
+[`mm_layer_nginx`]: #cookbook-mm_layer_nginx
+[`mm_layer_nodejs`]: #cookbook-mm_layer_nodejs
+[`mm_layer_ssh`]: #cookbook-mm_layer_ssh
 [VPC Peering Connection]: http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/vpc-peering-overview.html
 ["Hub-and-Spoke" Configuration]: http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/peering-configurations-full-access.html#one-to-many-vpcs-full-access

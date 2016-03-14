@@ -16,6 +16,10 @@ bin/*
 
 # Berkshelf
 Berksfile.lock
+cookbooks-*.tar.gz
 
 # AWS OpsWorks local workflow
 /aws-cookbooks/
+
+# Investigatory log results
+/_debug_logs/

@@ -11,4 +11,4 @@ version          '1.0.0'
 # Note the unofficial sibling Meteor Multiverse cookbooks that are dependencies
 ###
 
-depends 'mm_lib_common'
+depends 'mm_common'
