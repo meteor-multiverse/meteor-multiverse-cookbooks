@@ -1,6 +1,6 @@
 # meteor-multiverse-cookbooks
 
-Custom [Chef][] Cookbooks for Amazon [AWS OpsWorks][] to support [Meteor Multiverse][]
+Custom [Chef][] Cookbooks for Amazon [AWS OpsWorks][] to support [Meteor Multiverse][] environments
 
 
 
